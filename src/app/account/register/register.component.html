@@ -1,0 +1,43 @@
+<div class="outer">
+    <div class="container">
+        <div class="row">
+            <div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offert-md-3">
+                <div class="panel border bg-white">
+                    <div class="panel-heading">
+                        <h2 class="pt-3 font-weight-bold">
+                            Đăng ký
+                        </h2>
+                    </div>
+                    <div class="panel-body p-3">
+                        <form [formGroup]="signUpForm">
+                            <div class="form-group pt-3">
+                                <div class="input-field" [class.error]="signUpForm.controls['UserName'].dirty && signUpForm.hasError('required','UserName')">
+                                    <span class="fa fa-user p-2"></span>
+                                    <input formControlName="UserName" type="text" placeholder="Tên">
+                                </div>
+                            </div>
+                            <small *ngIf="signUpForm.controls['UserName'].dirty&&signUpForm.hasError('required','UserName')" class="text-danger">*Cần nhập tên*</small>
+                            <div class="form-group pt-3">
+                                <div class="input-field" [class.error]="signUpForm.controls['Email'].dirty && signUpForm.hasError('required','Email')">
+                                    <span class="fa fa-user p-2"></span>
+                                    <input formControlName="Email" type="text" placeholder="Email">
+                                </div>
+                            </div>
+                            <small *ngIf="signUpForm.controls['Email'].dirty&&signUpForm.hasError('required','Email')" class="text-danger">*Cần nhập Email*</small>
+                            <div class="form-group pt-3">
+                                <div class="input-field" [class.error]="signUpForm.controls['Password'].dirty && signUpForm.hasError('required','Password')">
+                                    <span class="fa fa-lock p-2"></span>
+                                    <input formControlName="Password" [type]="type" placeholder="Mật khẩu">
+                                    <span (click)="hideShowPass()" class="fa {{eyeIcon}}"></span>
+                                </div>
+                            </div>
+                            <small *ngIf="signUpForm.controls['Password'].dirty&&signUpForm.hasError('required','Password')" class="text-danger">*Cần nhập mật khẩu*</small>
+                            <button (click)="onSignup()" type="submit" class="btn btn-primary btn-block mt-4 w-100">Đăng ký</button>
+                            <div class="text-center pt4 textmuted">Đã có tài khoản ? <a routerLink="/login">Đăng nhập</a></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

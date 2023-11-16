@@ -1,0 +1,19 @@
+<div class="mb-3">
+  <label for="recipient-name" class="col-form-label">Tên công việc</label>
+  <input type="text" class="form-control" [(ngModel)]="tenCongViec"/>
+</div>
+<div class="mb-3">
+  <label for="danhMuc" class="col-form-label">Danh mục</label>
+  <select type="text" class="form-control" [(ngModel)]="danhMuc">
+    <option>--Chọn danh mục--</option>
+    <option *ngFor="let dMuc of dsTendanhmuc" [value]="dMuc.TagName">{{dMuc.TagName}}</option>
+  </select>
+</div>
+<div class="mb-3">
+  <label for="description" class="col-form-label">Mô tả công việc</label>
+  <textarea class="form-control" [(ngModel)]="moTaCongViec"></textarea>
+</div>
+<div class="mb-3">
+  <button type="button" class="btn btn-primary" (click)="themCongViec()" *ngIf="maCongViec==0">Thêm công việc</button>
+  <button type="button" class="btn btn-primary" (click)="suaCongViec()"*ngIf="maCongViec!=0">Sửa công việc</button>
+</div>

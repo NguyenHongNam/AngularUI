@@ -1,0 +1,54 @@
+<br>
+<div class="input-group mb-3">
+  <input type="text" name="search" class="form-control" [(ngModel)]="tuKhoaTimKiem" placeholder="Tìm kiếm công việc" (input)="onTuKhoaTimKiemChange()">
+</div>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="themCongViec()">
+    Thêm công việc
+</button>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{tieuDe}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+                <app-them-sua-c-viec [cViec]="cViec" *ngIf="dangThemSua" (taiLaidanhsach)="tailaiDSCongViec"></app-them-sua-c-viec>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<table class="table table-striped">
+    <thead>
+        <th (click)="sapXepBang('ID')">ID</th>
+        <th>Tên công việc</th>
+        <th>Danh mục</th>
+        <th>Mô tả</th>
+        <th>Ngày tạo</th>
+        <th>Tuỳ chọn</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let cViec of DSCongViec | paginate: { itemsPerPage: soLuongCongViecTrenTrang, currentPage: trangHienTai } ; let i = index">
+            <td>{{cViec.TaskID}}</td>
+            <td>{{cViec.Title}}</td>
+            <td>{{cViec.TagName}}</td>
+            <td>{{cViec.Description}}</td>
+            <td>{{cViec.CreatedDate}}</td>
+            <td>
+                <button type="button" class="btn btn-light mr-1" (click)="chitietCongViec(cViec)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Sửa
+                </button>
+                <button type="button" class="btn btn-light mr-1" (click)="chitietCongViec(cViec)">
+                    Xoá
+                </button>
+            </td>
+        </tr>
+    </tbody>
+  </table>
+  <pagination-controls
+  (pageChange)="trangHienTai = $event"
+></pagination-controls>

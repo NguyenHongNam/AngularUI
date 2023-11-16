@@ -1,0 +1,8 @@
+<div class="mb-3">
+    <label for="recipient-name" class="col-form-label">Tên danh mục</label>
+    <input type="text" class="form-control" [(ngModel)]="tenDanhMuc"/>
+  </div>
+  <div class="mb-3">
+    <button type="button" class="btn btn-primary" (click)="themDanhMuc()" *ngIf="maDanhMuc==0" (click)="taiLaidanhsach.emit(DSDanhMuc)">Thêm danh mục</button>
+    <button type="button" class="btn btn-primary" (click)="suaDanhMuc()"*ngIf="maDanhMuc!=0" (click)="taiLaidanhsach.emit(DSDanhMuc)">Sửa danh mục</button>
+  </div>

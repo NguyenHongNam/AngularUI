@@ -1,0 +1,48 @@
+<br>
+<div class="input-group mb-3">
+  <input type="text" name="search" class="form-control" [(ngModel)]="tuKhoaTimKiem" placeholder="Tìm kiếm danh mục" (input)="onTuKhoaTimKiemChange()">
+</div>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="themDanhMuc()">
+    Thêm danh mục
+</button>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{tieuDe}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+                <app-them-sua-d-muc [dMuc]="dMuc" *ngIf="dangThemSua" (taiLaidanhsach)="tailaiDSDanhMuc()"></app-them-sua-d-muc>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<table class="table table-striped">
+  <thead>
+    <th (click)="sapXepBang('ID')">ID</th>
+    <th>Tên danh mục</th>
+    <th>Tùy chọn</th>
+  </thead>
+  <tbody>
+      <tr *ngFor="let dMuc of DSDanhMuc | paginate: { itemsPerPage: soLuongDanhMucTrenTrang, currentPage: trangHienTai } ; let i = index" >
+          <td>{{i + 1}}</td>
+          <td>{{dMuc.TagName}}</td>
+          <td>
+              <button type="button" class="btn btn-light mr-1" (click)="chitietDanhMuc(dMuc)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Sửa
+              </button>
+              <button type="button" class="btn btn-light mr-1" (click)="xoaDanhMuc(dMuc)">
+                  Xoá
+              </button>
+          </td>
+      </tr>
+  </tbody>
+  </table>
+  <pagination-controls
+  (pageChange)="trangHienTai = $event"
+></pagination-controls>
