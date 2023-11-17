@@ -1,2 +1,26 @@
-<h4>Xin chào,{{userName}}</h4>
 <button (click)="logout()" class="btn btn-danger">Đăng xuất</button>
+<br>
+<div class="input-group mb-3">
+  <input type="text" name="search" class="form-control" [(ngModel)]="tuKhoaTimKiem" placeholder="Tìm kiếm tài khoản" (input)="onTuKhoaTimKiemChange()">
+</div>
+<table class="table table-striped">
+  <thead>
+    <th (click)="sapXepBang('ID')">ID</th>
+    <th>Tên tài khoản</th>
+    <th>Email</th>
+    <th>Mật khẩu</th>
+    <th>Role</th>
+  </thead>
+  <tbody>
+      <tr *ngFor="let tKhoan of DSUser | paginate: { itemsPerPage: soLuongUserTrenTrang, currentPage: trangHienTai } ; let i = index" >
+          <td>{{i + 1}}</td>
+          <td>{{tKhoan.UserName}}</td>
+          <td>{{tKhoan.Email}}</td>
+          <td>{{tKhoan.Password}}</td>
+          <td>{{tKhoan.Role}}</td>
+      </tr>
+  </tbody>
+  </table>
+  <pagination-controls
+  (pageChange)="trangHienTai = $event"
+></pagination-controls>
